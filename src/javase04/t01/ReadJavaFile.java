@@ -5,7 +5,9 @@ import java.io.*;
 import java.util.regex.*;
 
 public class ReadJavaFile {
-	public static final Charset UTF = Charset.forName("Cp1251");
+	public static final Charset WIN = Charset.forName("Cp1251");
+	public static final Charset UTF8 = Charset.forName("UTF8");
+	public static final Charset UTF16 = Charset.forName("UTF16");
 	StringBuilder storage = new StringBuilder();
 	String[] reservedWords = new String[53];
 	int[] reservedWordsCount;
@@ -38,10 +40,14 @@ public class ReadJavaFile {
 	}
 
 	public boolean readFile(String filename){
+		return readFile(filename, WIN);
+	}
+
+	public boolean readFile(String filename, Charset cs){
 		try{
 			InputStreamReader is = new InputStreamReader(
 				new FileInputStream(System.getProperty("user.dir")
-				+"/src/javase04/t01/"+filename),UTF);
+				+"/src/javase04/t01/"+filename),cs);
 			try{
 				while(is.ready()){
 					char[] cbuf = new char[1000];
@@ -82,12 +88,35 @@ public class ReadJavaFile {
 		}
 	}
 
-	public boolean writeFile(String filename){
+	public boolean writeWholeFile(String filename, Charset cs){
 		String lineSeparator = System.getProperty("line.separator");
 		try{
 			OutputStreamWriter os = new OutputStreamWriter(
 				new FileOutputStream(System.getProperty("user.dir")
-				+"/src/javase04/t01/"+filename),UTF);
+				+"/src/javase04/t01/"+filename),cs);
+			try{
+				os.write(storage.toString());
+				os.flush();
+			} catch (IOException e){
+				System.out.println(e);
+			}
+			return true;
+		} catch (FileNotFoundException e){
+			System.out.println(e);
+			return false;
+		}		
+	}
+
+	public boolean writeFile(String filename){
+		return writeFile(filename, WIN);
+	}
+
+	public boolean writeFile(String filename, Charset cs){
+		String lineSeparator = System.getProperty("line.separator");
+		try{
+			OutputStreamWriter os = new OutputStreamWriter(
+				new FileOutputStream(System.getProperty("user.dir")
+				+"/src/javase04/t01/"+filename),cs);
 			try{
 				for (int i=0; i<reservedWords.length; i++){
 					os.write(reservedWords[i]+" : "+reservedWordsCount[i]+lineSeparator);
