@@ -18,6 +18,25 @@ public class ReadJavaFile {
 		}
 	}
 
+	public boolean readTextFile(String filename){
+		try{
+			BufferedReader br = new BufferedReader(
+				new FileReader(System.getProperty("user.dir")
+				+"/src/javase04/t01/"+filename));
+			try{
+				while(br.ready()){
+					storage.append(br.readLine());
+				}
+			} catch (IOException e){
+				System.out.println(e);
+			}
+			return true;
+		} catch (FileNotFoundException e){
+			System.out.println(e);
+			return false;
+		}
+	}
+
 	public boolean readFile(String filename){
 		try{
 			InputStreamReader is = new InputStreamReader(
@@ -34,6 +53,30 @@ public class ReadJavaFile {
 			}
 			return true;
 		} catch (FileNotFoundException e){
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	public boolean writeTextFile(String filename){
+		String lineSeparator = System.getProperty("line.separator");
+		try{
+			BufferedWriter br = new BufferedWriter(
+				new FileWriter(System.getProperty("user.dir")
+				+"/src/javase04/t01/"+filename));
+			try{
+				for (int i=0; i<reservedWords.length; i++){
+					br.write(reservedWords[i]+" : "+reservedWordsCount[i]+lineSeparator);
+				}
+				br.flush();
+			} catch (IOException e){
+				System.out.println(e);
+			}
+			return true;
+		} catch (FileNotFoundException e){
+			System.out.println(e);
+			return false;
+		} catch (IOException e)	{
 			System.out.println(e);
 			return false;
 		}
