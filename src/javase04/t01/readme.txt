@@ -1,4 +1,7 @@
-First and second tasks from fourth homework.
+First three tasks from fourth homework.
+
+To get results please run ReadJavaFileExecute, ReadJavaTextFileExecute and TransferTextFromUtf8ToUtf16 
+for 1st, 2nd and 3rd task respectively.
 
 ReadJavaFile.class contains all methods
 ReadJavaFileExecute.class put the result from "ReadJavaFile.java" to "result.txt"
