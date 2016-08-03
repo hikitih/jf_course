@@ -1,8 +1,5 @@
 package javase03.t03;
 
-/**
- * Created by Goba on 31.07.2016.
- */
 public class Run {
     public static void main(String[] args) {
         ReadHTML rh = new ReadHTML();
