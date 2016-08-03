@@ -36,6 +36,8 @@ public class ReadJavaFile {
 		} catch (FileNotFoundException e){
 			System.out.println(e);
 			return false;
+		} finally {
+			br.close();
 		}
 	}
 
@@ -61,6 +63,8 @@ public class ReadJavaFile {
 		} catch (FileNotFoundException e){
 			System.out.println(e);
 			return false;
+		} finally {
+			is.close();
 		}
 	}
 
@@ -85,6 +89,8 @@ public class ReadJavaFile {
 		} catch (IOException e)	{
 			System.out.println(e);
 			return false;
+		} finally {
+			br.close();
 		}
 	}
 
@@ -104,6 +110,8 @@ public class ReadJavaFile {
 		} catch (FileNotFoundException e){
 			System.out.println(e);
 			return false;
+		} finally {
+			os.close();
 		}		
 	}
 
@@ -129,6 +137,8 @@ public class ReadJavaFile {
 		} catch (FileNotFoundException e){
 			System.out.println(e);
 			return false;
+		} finally {
+			os.close();
 		}		
 	}
 
