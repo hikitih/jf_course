@@ -33,7 +33,9 @@ public class ReadHTML {
         } catch (FileNotFoundException e){
             System.out.println(e);
             return false;
-        }
+        } finally {
+			is.close();
+		}
     }
 
     public boolean getNumbers(){
