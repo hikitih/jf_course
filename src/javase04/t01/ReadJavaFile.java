@@ -21,23 +21,20 @@ public class ReadJavaFile {
 	}
 
 	public boolean readTextFile(String filename){
-		try{
-			BufferedReader br = new BufferedReader(
+		try(BufferedReader br = new BufferedReader(
 				new FileReader(System.getProperty("user.dir")
-				+"/src/javase04/t01/"+filename));
-			try{
-				while(br.ready()){
-					storage.append(br.readLine());
-				}
-			} catch (IOException e){
-				System.out.println(e);
+				+"/src/javase04/t01/"+filename))){
+			
+			while(br.ready()){
+				storage.append(br.readLine());
 			}
 			return true;
 		} catch (FileNotFoundException e){
 			System.out.println(e);
 			return false;
-		} finally {
-			br.close();
+		} catch (IOException e){
+			System.out.println(e);
+			return false;
 		}
 	}
 
@@ -46,34 +43,31 @@ public class ReadJavaFile {
 	}
 
 	public boolean readFile(String filename, Charset cs){
-		try{
-			InputStreamReader is = new InputStreamReader(
+		try(InputStreamReader is = new InputStreamReader(
 				new FileInputStream(System.getProperty("user.dir")
-				+"/src/javase04/t01/"+filename),cs);
-			try{
-				while(is.ready()){
-					char[] cbuf = new char[1000];
-					is.read(cbuf);
-					storage.append(cbuf);
-				}
-			} catch (IOException e){
-				System.out.println(e);
+				+"/src/javase04/t01/"+filename),cs)){
+			
+			while(is.ready()){
+				char[] cbuf = new char[1000];
+				is.read(cbuf);
+				storage.append(cbuf);
 			}
 			return true;
 		} catch (FileNotFoundException e){
 			System.out.println(e);
 			return false;
-		} finally {
-			is.close();
+		} catch (IOException e){
+			System.out.println(e);
+			return false;
 		}
 	}
 
 	public boolean writeTextFile(String filename){
 		String lineSeparator = System.getProperty("line.separator");
-		try{
-			BufferedWriter br = new BufferedWriter(
+		try(BufferedWriter br = new BufferedWriter(
 				new FileWriter(System.getProperty("user.dir")
-				+"/src/javase04/t01/"+filename));
+				+"/src/javase04/t01/"+filename))){
+			
 			try{
 				for (int i=0; i<reservedWords.length; i++){
 					br.write(reservedWords[i]+" : "+reservedWordsCount[i]+lineSeparator);
@@ -89,30 +83,25 @@ public class ReadJavaFile {
 		} catch (IOException e)	{
 			System.out.println(e);
 			return false;
-		} finally {
-			br.close();
-		}
+		} 
 	}
 
 	public boolean writeWholeFile(String filename, Charset cs){
 		String lineSeparator = System.getProperty("line.separator");
-		try{
-			OutputStreamWriter os = new OutputStreamWriter(
+		try(OutputStreamWriter os = new OutputStreamWriter(
 				new FileOutputStream(System.getProperty("user.dir")
-				+"/src/javase04/t01/"+filename),cs);
-			try{
-				os.write(storage.toString());
-				os.flush();
-			} catch (IOException e){
-				System.out.println(e);
-			}
+				+"/src/javase04/t01/"+filename),cs)){
+			
+			os.write(storage.toString());
+			os.flush();
 			return true;
 		} catch (FileNotFoundException e){
 			System.out.println(e);
 			return false;
-		} finally {
-			os.close();
-		}		
+		} catch (IOException e){
+			System.out.println(e);
+			return false;
+		}
 	}
 
 	public boolean writeFile(String filename){
@@ -121,25 +110,22 @@ public class ReadJavaFile {
 
 	public boolean writeFile(String filename, Charset cs){
 		String lineSeparator = System.getProperty("line.separator");
-		try{
-			OutputStreamWriter os = new OutputStreamWriter(
+		try(OutputStreamWriter os = new OutputStreamWriter(
 				new FileOutputStream(System.getProperty("user.dir")
-				+"/src/javase04/t01/"+filename),cs);
-			try{
-				for (int i=0; i<reservedWords.length; i++){
-					os.write(reservedWords[i]+" : "+reservedWordsCount[i]+lineSeparator);
-				}
-				os.flush();
-			} catch (IOException e){
-				System.out.println(e);
+				+"/src/javase04/t01/"+filename),cs)){
+			
+			for (int i=0; i<reservedWords.length; i++){
+				os.write(reservedWords[i]+" : "+reservedWordsCount[i]+lineSeparator);
 			}
+			os.flush();
 			return true;
 		} catch (FileNotFoundException e){
 			System.out.println(e);
 			return false;
-		} finally {
-			os.close();
-		}		
+		} catch (IOException e){
+			System.out.println(e);
+			return false;
+		}
 	}
 
 	public void countReservedWords(){
