@@ -10,3 +10,6 @@ Actor and film are classes
 FilmCollection is a set of films and actors with some add/delete features
 FilmCollectionEditor is just class with save and load FilmCollection methods
 Try as were said above is the only class with main method
+
+And yes, I know that all my files lies here in one big pile. But this is not a big deal yet cause there is less than 20 of them. 
+I would make separate folders when needed.
