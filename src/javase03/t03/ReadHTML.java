@@ -16,9 +16,8 @@ public class ReadHTML {
     ArrayList<Integer> imgNumbers = new ArrayList<>();
 
     public boolean readLogFromFile(String filename){
-        try {
-            InputStreamReader is = new InputStreamReader(new FileInputStream(System.getProperty("user.dir")
-                    +"/src/javase03/t03/"+filename),WIN);
+        try(InputStreamReader is = new InputStreamReader(new FileInputStream(System.getProperty("user.dir")
+                    +"/src/javase03/t03/"+filename),WIN);) {
 
             try {
                 while(is.ready()){
@@ -33,9 +32,10 @@ public class ReadHTML {
         } catch (FileNotFoundException e){
             System.out.println(e);
             return false;
-        } finally {
-		is.close();
-	}
+	} catch (IOException e){
+            System.out.println(e);
+            return false;
+        }
     }
 
     public boolean getNumbers(){
