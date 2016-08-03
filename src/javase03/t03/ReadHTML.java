@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Goba on 31.07.2016.
- */
 public class ReadHTML {
     public static final Charset WIN = Charset.forName("Cp1251");
 
