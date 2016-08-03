@@ -34,8 +34,8 @@ public class ReadHTML {
             System.out.println(e);
             return false;
         } finally {
-			is.close();
-		}
+		is.close();
+	}
     }
 
     public boolean getNumbers(){
