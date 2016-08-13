@@ -71,6 +71,7 @@ public class UserResourceThread {
                     }
                 }
                 System.out.println("Поток " + getName() + " завершил работу.");
+                this.stopThread();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
