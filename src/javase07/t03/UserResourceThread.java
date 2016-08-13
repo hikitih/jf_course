@@ -2,9 +2,6 @@ package javase07.t03;
 
 import java.util.Random;
 
-/**
- * Created by Goba on 13.08.2016.
- */
 public class UserResourceThread {
     public static void main(String[] args) throws InterruptedException {
         SharedResource res = new SharedResource();
