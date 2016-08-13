@@ -3,9 +3,6 @@ package javase07.t03;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Goba on 13.08.2016.
- */
 public class SharedResource {
 
     private List<Integer> list;
