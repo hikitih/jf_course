@@ -81,13 +81,13 @@ public class UserResourceThread {
                 System.out.println("Поток " + getName() + " хочет извлечь число.");
                 number = resource.getELement();
                 while (number == null) {
+                    if (resource.isNeedMoreElements()) {
+                        break;
+                    }
                     System.out.println("Поток " + getName() + " ждет пока очередь заполнится.");
                     resource.setNeedMoreElements(true);
                     resource.wait();
                     System.out.println("Поток " + getName() + " возобновил работу.");
-                    if (resource.isNeedMoreElements()) {
-                        break;
-                    }
                     number = resource.getELement();
                 }
                 if (number==null){
