@@ -47,38 +47,8 @@ public class BinarySearchTree<K extends Comparable, V> {
     }
 
     /*
-    public void addNodeRecursive(final K key, final V value){
-        if (root==null){
-            root = new Node<K, V>(key,value);
-        } else {
-            addNodeRecursive(key,value,root);
-        }
-    }
-
-    private Node<K, V> addNodeRecursive(final K key, final V value, Node<K, V> tree){
-        if (tree==null) {
-            return new Node<K, V>(key,value);
-        }
-        if (key.compareTo(tree.key)>0){
-            if (tree.right==null) {
-                tree.right = addNodeRecursive(key, value, tree.right);
-                return tree.right;
-            } else {
-                return addNodeRecursive(key, value, tree.right);
-            }
-        } else if (key.compareTo(tree.key)<0) {
-            if (tree.left==null) {
-                tree.left = addNodeRecursive(key, value, tree.left);
-                return tree.left;
-            } else {
-                return addNodeRecursive(key, value, tree.left);
-            }
-        } else {
-            tree.value = value;
-            return tree;
-        }
-    }
-    */
+     * recursive
+     */
     public void addNodeRecursive(final K key, final V value) {
         if (root.key == null) {
             root = new Node<K, V>(key, value);
@@ -150,6 +120,9 @@ public class BinarySearchTree<K extends Comparable, V> {
         return parent;
     }
 
+    /*
+     * non-recursive
+     */
     public void addNode(final K key, final V value) {
         Node<K, V> node = root;
         Node<K, V> parent = root;
@@ -178,31 +151,6 @@ public class BinarySearchTree<K extends Comparable, V> {
                 parent.left = newNode;
             } else {
                 parent.right = newNode;
-            }
-        }
-    }
-
-    public void view() {
-        if (root.key==null){
-            System.out.println("Tree is empty!");
-        } else {
-            ArrayList<Node> nodes = new ArrayList<Node>();
-            nodes.add(root);
-            while (!nodes.isEmpty()) {
-                Node node = nodes.get(0);
-                System.out.print("Me: " + node.value.toString());
-                if (node.parent != null) {
-                    System.out.println(", parent: " + node.parent.value.toString());
-                } else {
-                    System.out.println();
-                }
-                if (node.left != null) {
-                    nodes.add(node.left);
-                }
-                if (node.right != null) {
-                    nodes.add(node.right);
-                }
-                nodes.remove(node);
             }
         }
     }
@@ -267,4 +215,31 @@ public class BinarySearchTree<K extends Comparable, V> {
         }
     }
 
+    /*
+     * exposition
+     */
+    public void view() {
+        if (root.key==null){
+            System.out.println("Tree is empty!");
+        } else {
+            ArrayList<Node> nodes = new ArrayList<Node>();
+            nodes.add(root);
+            while (!nodes.isEmpty()) {
+                Node node = nodes.get(0);
+                System.out.print("Me: " + node.value.toString());
+                if (node.parent != null) {
+                    System.out.println(", parent: " + node.parent.value.toString());
+                } else {
+                    System.out.println();
+                }
+                if (node.left != null) {
+                    nodes.add(node.left);
+                }
+                if (node.right != null) {
+                    nodes.add(node.right);
+                }
+                nodes.remove(node);
+            }
+        }
+    }
 }
