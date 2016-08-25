@@ -58,11 +58,7 @@ public class UserResourceThread {
                 while (run) {
                     action = rand.nextInt(1000);
                     if (action % 2 == 0) {
-                        if (!resource.isNeedMoreElements()) {
-                            getIntegersFromResource();
-                        } else {
-                            setIntegersIntoResource();
-                        }
+                        getIntegersFromResource();
                     } else {
                         setIntegersIntoResource();
                     }
