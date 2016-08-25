@@ -82,7 +82,7 @@ public class UserResourceThread {
                     }
                     System.out.println("Поток " + getName() + " ждет пока очередь заполнится.");
                     resource.setNeedMoreElements(true);
-                    resource.wait();
+                    resource.wait(100);
                     System.out.println("Поток " + getName() + " возобновил работу.");
                     number = resource.getELement();
                 }
