@@ -1,5 +1,9 @@
 package javase05.t02;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class ReadPropertiesFile {
@@ -19,26 +23,39 @@ public class ReadPropertiesFile {
         return null;
     }
 
-    public static void viewProperty(String resource, String property){
-        String result = ReadPropertiesFile.readProperty(resource,property);
-        if (result!=null){
-            System.out.println(result);
+    public static String viewProperty(String resource, String property, Properties properties){
+        if (properties.containsKey(property)) {
+            return properties.getProperty(property);
+        } else {
+            System.out.println("EXCEPTION!!!\n\tCould not find property '" +
+                    property + "' in file '" + resource + ".properties'");
+            return null;
         }
+    }
+
+    public static Properties getAllFuckingProperties(String resource){
+        Properties properties = new Properties();
+        try {
+            ResourceBundle bundle = ResourceBundle.getBundle(resource);
+            for (String property: bundle.keySet()){
+                properties.put(property,bundle.getString(property));
+            }
+            return properties;
+        } catch (MissingResourceException e) {
+            System.out.println("EXCEPTION!!!\n\tCould not find file '" + resource + ".properties'");
+        }
+        return null;
     }
 
     public static Properties getProperties(String resource){
         Properties properties = new Properties();
-        try {
-            ResourceBundle bundle = ResourceBundle.getBundle(resource);
-            Enumeration<String> keys = bundle.getKeys();
-            while (keys.hasMoreElements()) {
-                String next = keys.nextElement();
-                if (bundle.containsKey(next)) {
-                    properties.put(next, bundle.getString(next));
-                }
-            }
+        try (BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")
+                +"/src/"+resource+".properties"))){
+            properties.load(br);
         } catch (MissingResourceException e) {
             System.out.println("EXCEPTION!!!\n\tCould not find file '" + resource + ".properties'");
+        } catch ( IOException e) {
+            e.printStackTrace();
         }
         return properties;
     }
